@@ -81,9 +81,10 @@
 		flex-direction: column;
 		align-items: center;
 		width: 100%;
-		z-index: 2;
+		z-index: 3;
 		top: 0;
 		transition: top 200ms ease-in-out;
+		position: relative;
 	}
 	.top {
 		background: var(--grey);
