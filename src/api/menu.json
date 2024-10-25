@@ -1,0 +1,143 @@
+[
+  {
+    "name": "Starters",
+    "items": [
+      {
+        "title": "Hummus Plate",
+        "description": "Our house-made hummus topped with feta and served with a variety of fresh and pickled veggies, olives, and accompanied by warm pita bread."
+      },
+      {
+        "title": "Jalapeño Poppers",
+        "description": "Fresh jalapeño peppers stuffed with creamy cheese, wrapped in crispy bacon and served with a side of housemade chipotle raspberry sauce for dipping."
+      },
+      {
+        "title": "Burrata",
+        "description": "A delightful combination of creamy burrata cheese served with crispy crostinis, accompanied by roasted tomatoes, pesto, and a drizzle of olive oil. Garnished with fresh basil chiffonade. Perfect for any cheese lover."
+      },
+      {
+        "title": "Slider Trio",
+        "description": "An irresistible trio of mini burgers that cater to every taste bud. Choose from our classic bacon cheddar, savory mushroom swiss with blue cheese, or crispy buffalo chicken with blue cheese, or mix and match up to three on a plate. your table."
+      },
+      {
+        "title": "Truffle Fries",
+        "description": "Crispy shoestring fries drizzled with fragrant truffle oil, offering a rich and earthy twist on a classic favorite."
+      }
+    ]
+  },
+  {
+    "name": "Salads",
+    "items": [
+      {
+        "title": "House Salad",
+        "description": "Classic combination of Romaine lettuce, tomato, cucumber, and red onion, providing a fresh and crisp foundation for your meal. We recommend our house made ranch."
+      },
+      {
+        "title": "Caesar Salad",
+        "description": "Crisp Romaine lettuce tossed with crunchy croutons, savory Parmesan shavings, and a zesty lemon twist. For a protein boost, add grilled or crispy chicken."
+      },
+      {
+        "title": "The Rotator",
+        "description": "On our quarterly rotation we have a salad that contains, romaine lettuce, red onion, strawberry, and goat cheese."
+      }
+    ]
+  },
+  {
+    "name": "Wood-fired Pizza",
+    "items": [
+      {
+        "title": "Sweet Dreams Are Made Of Cheese",
+        "description": "A classic pizza with a tomato sauce base and a generous portion of cheese."
+      },
+      {
+        "title": "Circles Of Joy",
+        "description": "Is it possible to frown while eating a pepperoni pizza? A timeless favorite featuring pepperoni slices, tomato sauce base and mozzarella cheese."
+      },
+      {
+        "title": "Nice To Meat You",
+        "description": "A hearty pizza loaded with pepperoni, sausage, ham, and bacon on a tomato sauce base with mozzarella cheese."
+      },
+      {
+        "title": "Pineapple Belongs On Pizza",
+        "description": "A sweet and savory combination of ham, pineapple, and mozzarella cheese on a tomato sauce base."
+      },
+      {
+        "title": "Queen Marge",
+        "description": "A traditional pizza with a tomato sauce base, roasted garlic, fresh mozzarella cheese, and a drizzle of olive oil."
+      },
+      {
+        "title": "Seas The Day",
+        "description": "A vegetarian delight with a choice of pesto or olive oil base, kalamata olives, roasted garlic, red onion, fresh mozzarella cheese, feta cheese, and a sprinkling of fresh basil chiffonade."
+      },
+      {
+        "title": "The Chickens Are Out!",
+        "description": "A tangy BBQ sauce base topped with tender chicken, red onion, cilantro, fresh mozzarella cheese, and pineapple."
+      },
+      {
+        "title": "Franks A Lot",
+        "description": "A spicy buffalo sauce base with chicken, red onion, pineapple, fresh mozzarella cheese and a dash of fresh parsley."
+      },
+      {
+        "title": "The Sticky Piggy",
+        "description": "Pepper Tree Spicy sausage paired with a drizzle of honey on a crispy crust, fresh mozzarella cheese, creating a balance of heat and sweetness."
+      }
+    ]
+  },
+  {
+    "name": "Cocktails",
+    "items": [
+      {
+        "title": "Level Up",
+        "description": "A refreshing blend of lemon, Stoli Citrus vodka, simple syrup, and lemonade, finished with a touch of Chambord. Garnished with a lemon wedge and raspberry skewer."
+      },
+      {
+        "title": "Spicy Pineapple Margarita",
+        "description": "An exciting mix of Tres Agave Reposado Tequila, agave, lemon, lime, and pineapple juice, served with Chamoy and Tajin. Garnished with a pineapple wedge and jalapeño."
+      },
+      {
+        "title": "White Chocolate Espresso Martini",
+        "description": "An indulgent treat featuring Crater Lake Hazelnut Espresso Vodka, Baileys, and white chocolate liquor, swirled with chocolate syrup. Topped with coffee beans."
+      },
+      {
+        "title": "Bourbon Vacation",
+        "description": "A tropical-inspired cocktail with Makers Mark bourbon, passion fruit puree, lemon and orange juices, agave, and egg white. Garnished with basil and lemon."
+      },
+      {
+        "title": "I Peel Good",
+        "description": "A mix of Crater Lake Vodka, whipped cream, lemon-lime soda, and fresh orange. Garnished with an orange slice and a sugar rim."
+      },
+      {
+        "title": "Lavender Lemon Drop",
+        "description": "A refreshing blend of Stoli Citrus vodka, lavender syrup, lemon juice, and lemonade. Served with a lemon wedge garnish."
+      },
+      {
+        "title": "Whiskey Sour",
+        "description": "A balanced blend of Buffalo Trace bourbon, lemon juice, simple syrup, and egg whites. Garnished with a lemon wedge and a bamboo skewered cherry."
+      },
+      {
+        "title": "Anchor Rose Sour",
+        "description": "A mix of Sinister Anchor Rose Pineapple Rum, lemon juice, pineapple juice, egg white, and orgeat. Garnished with a pineapple wedge and a basil leaf."
+      },
+      {
+        "title": "Bees Knees",
+        "description": "A refreshing cocktail with Crater Lake Gin, honey, and fresh lemon juice. Garnished with a lemon wedge."
+      }
+    ]
+  },
+  {
+    "name": "Mocktails",
+    "items": [
+      {
+        "title": "Lavender Limeade",
+        "description": "A blend of lime juice, lavender syrup, and water, served in a steamed pilsner glass. Garnished with a lime wedge for a vibrant touch."
+      },
+      {
+        "title": "Berry Bomb",
+        "description": "A vibrant mix of muddled mint, raspberry, blackberry, and blueberry, blended with simple syrup and fresh lime juice. Served over ice and topped with soda water. Garnished with a lime wedge, mint sprig, and bamboo skewered berries for a burst of fruity flavor."
+      },
+      {
+        "titie": "Strawberry Mint Lemonade",
+        "description": "A blend of muddled mint and strawberries, fresh lemon juice, simple syrup, and soda water, served over ice and garnished with a strawberry and mint sprig."
+      }
+    ]
+  }
+]

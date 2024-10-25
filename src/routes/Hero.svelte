@@ -68,6 +68,7 @@
 		color: var(--gold);
 		font-size: 46px;
 		font-family: 'Eastwood';
+		margin: 0;
 	}
 
 	.content {
