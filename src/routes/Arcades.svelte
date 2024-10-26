@@ -94,7 +94,7 @@
 		opacity: 0.35;
 		display: block;
 		position: absolute;
-		top: 5%;
+		top: 0;
 		left: 5%;
 		right: 0;
 		bottom: 0;
