@@ -94,12 +94,13 @@
 		opacity: 0.35;
 		display: block;
 		position: absolute;
-		top: 0;
-		left: 0;
+		top: 5%;
+		left: 5%;
 		right: 0;
 		bottom: 0;
-		height: 100%;
-		width: 101%;
+		height: 102%;
+		width: 100%;
+		max-width: 90%;
 		border-radius: 25px;
 	}
 
@@ -114,6 +115,12 @@
 		border-radius: 25px;
 		outline: 8px solid var(--gold);
 		border: 8px solid var(--orange);
+	}
+
+	@media (max-width: 900px) {
+		.arcadeImage .overlay {
+			height: 100%;
+		}
 	}
 
 	@media (max-width: 800px) {
