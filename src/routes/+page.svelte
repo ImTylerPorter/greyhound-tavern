@@ -1,4 +1,5 @@
 <script>
+	import Arcades from './Arcades.svelte';
 	import Events from './Events.svelte';
 	import Header from './Header.svelte';
 	import Hero from './Hero.svelte';
@@ -10,3 +11,4 @@
 <Hero />
 <Menu {data} />
 <Events events={data?.events} />
+<Arcades />

@@ -77,14 +77,14 @@ p {
 }
 
 p {
-  line-height: 1.5;
-  font-family: "Afacad Flux", sans-serif;
+  line-height: 1.3;
+  margin-top: 0;
+  margin-bottom: 7px;
 }
 
 a {
   color: var(--color-theme-1);
   text-decoration: none;
-  font-family: "Afacad Flux", sans-serif;
 }
 
 

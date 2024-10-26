@@ -1,5 +1,6 @@
 <script>
 	// @ts-nocheck
+	import AngleBackground from '../components/AngleBackground.svelte';
 	import SectionTitle from '../components/SectionTitle.svelte';
 	let { data } = $props();
 	let activeMenu = $state(0);
@@ -45,9 +46,7 @@
 		</div>
 	</div>
 
-	<div class="bg">
-		<img src="/images/bg.png" alt="Decorative background" />
-	</div>
+	<AngleBackground />
 </section>
 
 <style>
@@ -64,20 +63,6 @@
 		width: 960px;
 		max-width: 90%;
 		margin: 0 auto;
-	}
-	.bg {
-		position: absolute;
-		top: -70px;
-		left: 0;
-		right: 0;
-		bottom: 0;
-		overflow: hidden;
-		z-index: 2;
-	}
-	.bg img {
-		width: 100%;
-		height: 110%;
-		object-fit: cover;
 	}
 	.menuItemsNav {
 		display: flex;
