@@ -1,12 +1,53 @@
 <script>
+	import { page } from '$app/stores';
 	let formState = $state({
 		name: '',
 		email: '',
-		message: ''
+		message: '',
+		formError: ''
 	});
+	let messageSent = false;
+	/**
+	 * @type {string | null}
+	 */
+
+	const submitForm = async (/** @type {{ preventDefault: () => void; }} */ event) => {
+		event.preventDefault();
+		const formData = new FormData();
+		formData.append('name', formState.name);
+		formData.append('email', formState.email);
+		formData.append('message', formState.message);
+
+		// Assuming your server route is the same as where this form is located
+		const response = await fetch($page.url.pathname, {
+			method: 'POST',
+			body: formData
+		});
+
+		if (!response.ok) {
+			const errorData = await response.json();
+			if (errorData && errorData.error && errorData.error.message) {
+				formState.formError = errorData.error.message;
+			} else {
+				formState.formError = 'An unexpected error occurred';
+			}
+			return;
+		}
+		const data = await response.json();
+		if (data.status === 200) {
+			formState.formError = '';
+			// Show success message
+			messageSent = true;
+		} else {
+			formState.formError = 'An error occurred';
+		}
+	};
 </script>
 
 <form>
+	{#if formState.formError}
+		<p style="color:red;">{formState.formError}</p>
+	{/if}
 	<label>
 		<span>Name</span>
 		<input type="text" name="name" bind:value={formState.name} />
@@ -45,7 +86,7 @@
 		font-size: 14px;
 		outline: solid 1px var(--gold);
 		padding: 10px 20px;
-		width: 100%;
+		width: -webkit-fill-available;
 	}
 	textarea {
 		min-height: 250px;
