@@ -1,5 +1,6 @@
 import Mailgun from 'mailgun.js';
 import formData from 'form-data';  // Make sure to import form-data
+import { error } from '@sveltejs/kit';
 
 import { VITE_MAILGUN_API_KEY, VITE_EMAIL_TO } from '$env/static/private'; // Import server-side env variables
 
@@ -21,7 +22,7 @@ export const actions = {
       throw error(400, 'Sorry, not today bot!');
     }
 
-    // Validate form fields
+    // // Validate form fields
     if (!name) {
       throw error(400, 'Name is missing');
     }
@@ -44,7 +45,7 @@ export const actions = {
       };
 
       // Uncomment the following line to send the email
-      await mg.messages.create('sandboxc6fe94f30eb741b4af19a6e43da69e4a.mailgun.org', mailgunData);
+      await mg.messages.create('sandbox622eaf3351354c1fa4ca59a68d328b52.mailgun.org', mailgunData);
 
       return { success: true, message: 'Message sent successfully.' };
     } catch (err) {

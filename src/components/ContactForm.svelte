@@ -4,9 +4,9 @@
 		name: '',
 		email: '',
 		message: '',
-		formError: ''
+		formError: '',
+		messageSent: false
 	});
-	let messageSent = false;
 	/**
 	 * @type {string | null}
 	 */
@@ -37,31 +37,39 @@
 		if (data.status === 200) {
 			formState.formError = '';
 			// Show success message
-			messageSent = true;
+			formState.messageSent = true;
 		} else {
 			formState.formError = 'An error occurred';
 		}
 	};
 </script>
 
-<form>
-	{#if formState.formError}
-		<p style="color:red;">{formState.formError}</p>
-	{/if}
-	<label>
-		<span>Name</span>
-		<input type="text" name="name" bind:value={formState.name} />
-	</label>
-	<label>
-		<span>Email</span>
-		<input type="email" name="email" bind:value={formState.email} />
-	</label>
-	<label>
-		<span>Message</span>
-		<textarea name="message" bind:value={formState.message}></textarea>
-	</label>
-	<button type="submit">Send</button>
-</form>
+{#if !formState.messageSent}
+	<form onsubmit={submitForm}>
+		{#if formState.formError}
+			<p style="color:red;">{formState.formError}</p>
+		{/if}
+		<label>
+			<span>Name</span>
+			<input type="text" name="name" bind:value={formState.name} />
+		</label>
+		<label>
+			<span>Email</span>
+			<input type="email" name="email" bind:value={formState.email} />
+		</label>
+		<label>
+			<span>Message</span>
+			<textarea name="message" bind:value={formState.message}></textarea>
+		</label>
+		<input type="text" name="_honey_pot" style="display:none" />
+		<button type="submit">Send</button>
+	</form>
+{:else}
+	<div class="messageSent">
+		<h3>Thank you for your message, {formState.name.split(' ')[0]}!</h3>
+		<p>We look forward to speaking and will reach out soon!</p>
+	</div>
+{/if}
 
 <style>
 	form {
@@ -95,5 +103,16 @@
 	button {
 		border: none;
 		align-self: center;
+	}
+	.messageSent {
+		text-align: center;
+	}
+	.messageSent h3 {
+		color: var(--white);
+		font-size: 3em;
+	}
+	.messageSent p {
+		color: var(--white);
+		font-size: 1.6rem;
 	}
 </style>
