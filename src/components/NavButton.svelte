@@ -4,7 +4,7 @@
 	export let open;
 </script>
 
-<button onclick={onToggle} class:open>
+<button aria-label="Hamburger Icon" onclick={onToggle} class:open>
 	<span></span>
 	<span></span>
 	<span></span>

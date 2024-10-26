@@ -21,7 +21,7 @@
 		<div class="borders">
 			<div class="menuWrap">
 				<div class="social">
-					<a href="https://facebook.com/greyhoundtavernlive" target="_BLANK">
+					<a aria-label="Facebook" href="https://facebook.com/greyhoundtavernlive" target="_BLANK">
 						<svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 45 45">
 							<circle
 								id="Ellipse_2"
@@ -39,7 +39,11 @@
 							/>
 						</svg>
 					</a>
-					<a href="https://instagram.com/greyhoundtavernlive" target="_BLANK">
+					<a
+						aria-label="Instagram"
+						href="https://instagram.com/greyhoundtavernlive"
+						target="_BLANK"
+					>
 						<svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 45 45">
 							<circle
 								id="Ellipse_1"
@@ -156,9 +160,7 @@
 			text-align: center;
 			gap: 25px;
 		}
-		.main-menu {
-			order: 1;
-		}
+
 		.social {
 			order: 2;
 		}

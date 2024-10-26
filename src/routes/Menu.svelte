@@ -20,6 +20,9 @@
 						toggleMenu(i);
 					}}
 					class="navItem"
+					class:active={activeMenu === i}
+					role="button"
+					tabindex={i}
 				>
 					<p>{item.name}</p>
 				</div>

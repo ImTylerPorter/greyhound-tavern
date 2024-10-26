@@ -76,9 +76,6 @@
 		max-width: 90%;
 		margin: 0 auto;
 	}
-	.button {
-		margin-top: 40px;
-	}
 
 	@media (max-width: 900px) {
 		h1 {
