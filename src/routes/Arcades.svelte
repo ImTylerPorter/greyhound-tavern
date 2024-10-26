@@ -106,7 +106,8 @@
 	.arcadeImage img {
 		height: 100%;
 		width: 900px;
-		max-width: 100%;
+		max-width: 90%;
+		margin: 0 auto;
 		display: block;
 		object-fit: cover;
 		object-position: center;

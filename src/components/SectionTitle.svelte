@@ -126,6 +126,8 @@
 	h3 {
 		margin: 0;
 		font-size: 60px;
+		line-height: 1;
+		text-align: center;
 	}
 
 	.leftLines,
