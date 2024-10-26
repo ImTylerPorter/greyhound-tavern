@@ -1,3 +1,9 @@
+<script>
+	// @ts-nocheck
+
+	let { title, color } = $props();
+</script>
+
 <div class="title">
 	<div class="stars">
 		<svg xmlns="http://www.w3.org/2000/svg" width="162" height="32.544" viewBox="0 0 162 32.544">
@@ -72,7 +78,7 @@
 				</g>
 			</svg>
 		</div>
-		<h3>MENU</h3>
+		<h3 style:color>{title}</h3>
 		<div class="rightLines">
 			<svg
 				xmlns="http://www.w3.org/2000/svg"

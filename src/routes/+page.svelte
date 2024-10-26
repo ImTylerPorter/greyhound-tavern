@@ -1,4 +1,5 @@
 <script>
+	import Events from './Events.svelte';
 	import Header from './Header.svelte';
 	import Hero from './Hero.svelte';
 	import Menu from './Menu.svelte';
@@ -8,3 +9,4 @@
 <Header />
 <Hero />
 <Menu {data} />
+<Events events={data?.events} />

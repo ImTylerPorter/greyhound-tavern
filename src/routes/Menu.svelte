@@ -11,7 +11,7 @@
 
 <section>
 	<div class="menuContent">
-		<SectionTitle />
+		<SectionTitle title="Menu" />
 
 		<div class="menuItemsNav">
 			{#each data?.menu as item, i}
