@@ -130,7 +130,7 @@ C290.3,505,233.1,481.3,190.9,439.1L190.9,439.1z"
 		fill: var(--orange);
 		transition: all 300ms ease-in-out;
 	}
-	.slider-cue:hover .slider-cue svg path {
+	.slider-cue:hover svg path {
 		fill: var(--white);
 	}
 	.left {

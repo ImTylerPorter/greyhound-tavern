@@ -74,12 +74,6 @@
 		transition: top 200ms ease-in-out;
 		position: relative;
 	}
-	.top {
-		background: var(--grey);
-		width: 100%;
-		display: flex;
-		justify-content: center;
-	}
 	.logo {
 		flex-direction: column;
 		align-items: center;
@@ -118,12 +112,6 @@
 	}
 
 	@media (max-width: 1101px) {
-		header {
-			align-items: center;
-			justify-content: center;
-			flex-direction: column;
-		}
-
 		.logo {
 			width: auto;
 		}
@@ -136,9 +124,6 @@
 
 		.social {
 			order: 2;
-		}
-		.orderLink {
-			order: 3;
 		}
 	}
 </style>
