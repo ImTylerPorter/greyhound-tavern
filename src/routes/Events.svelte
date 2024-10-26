@@ -4,7 +4,7 @@
 	let { events } = $props();
 </script>
 
-<section>
+<section id="events">
 	<SectionTitle title="Events" color="white" />
 	<div class="eventContent">
 		<div class="events event-{events.length}">

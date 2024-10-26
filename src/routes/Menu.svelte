@@ -10,7 +10,7 @@
 	}
 </script>
 
-<section>
+<section id="menu">
 	<div class="menuContent">
 		<SectionTitle title="Menu" />
 
