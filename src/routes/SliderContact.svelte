@@ -38,7 +38,7 @@
 		z-index: 10;
 		width: 900px;
 		max-width: 90%;
-		margin: 0 auto;
+		margin: 40px auto 0;
 	}
 	#theSlider {
 		position: relative;

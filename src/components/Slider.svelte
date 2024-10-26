@@ -1,6 +1,39 @@
 <script>
 	// @ts-nocheck
+	import { register } from 'swiper/element/bundle';
+	import { onMount } from 'svelte';
+	register();
 	let { images } = $props();
+
+	onMount(() => {
+		const swiperEl = document.querySelector('swiper-container');
+		Object.assign(swiperEl, {
+			loop: true,
+			slidesPerView: 1,
+			spaceBetween: 20,
+			speed: 4000,
+			autoplay: {
+				delay: 0,
+				disableOnInteraction: true
+			},
+			navigation: {
+				nextEl: '.left',
+				prevEl: '.right'
+			},
+			breakpoints: {
+				400: {
+					slidesPerView: 1
+				},
+				768: {
+					slidesPerView: 2
+				},
+				1024: {
+					slidesPerView: 3
+				}
+			}
+		});
+		swiperEl.initialize();
+	});
 </script>
 
 <div class="swiper imageSwiper">
@@ -36,11 +69,13 @@ L509.1,120.9z"
 	<div class="swiper-wrapper">
 		<!-- loop over images -->
 		{#if images.length != 0}
-			{#each images as image}
-				<div class="swiper-slide">
-					<img src={image.url} alt={image.alt} />
-				</div>
-			{/each}
+			<swiper-container init="false">
+				{#each images as image}
+					<swiper-slide>
+						<img src={image.url} alt={image.alt} />
+					</swiper-slide>
+				{/each}
+			</swiper-container>
 		{/if}
 	</div>
 	<div class="slider-cue right">
@@ -75,10 +110,10 @@ C290.3,505,233.1,481.3,190.9,439.1L190.9,439.1z"
 </div>
 
 <style>
-	.swiper-slide {
+	swiper-slide {
 		height: 300px;
 	}
-	.swiper-slide img {
+	swiper-slide img {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
