@@ -15,7 +15,7 @@
 		<div class="bg">
 			<img src="/images/bg.png" alt="Decorative background" />
 		</div>
-		<div class="contact">
+		<div id="contaact" class="contact">
 			<SectionTitle title="Contact Us" color="white" />
 			<div class="theForm">
 				<ContactForm />
