@@ -1,3 +1,7 @@
+<script>
+	let { location } = $props();
+</script>
+
 <ul>
 	<li><a href="#menu">Menu</a></li>
 	<li><a href="#events">Events</a></li>
@@ -8,6 +12,7 @@
 	ul {
 		min-height: 47px;
 		margin: 0;
+		padding: 0;
 		align-content: center;
 	}
 	li {

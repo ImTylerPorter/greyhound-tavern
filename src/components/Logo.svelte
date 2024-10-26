@@ -100,7 +100,7 @@
 
 <style>
 	svg {
-		width: 300px;
+		width: 100%;
 		display: block;
 		z-index: 99;
 	}

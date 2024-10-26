@@ -1,25 +1,20 @@
 <script>
 	import Logo from '../components/Logo.svelte';
 	import Nav from '../components/Nav.svelte';
-	import NavButton from '../components/NavButton.svelte';
-
-	let open = $state(false);
-	function handleToggle() {
-		open = !open;
-	}
 </script>
 
-<header>
-	<div class="top">
-		<a class="logo" href="/">
-			<Logo />
-		</a>
-		<NavButton onToggle={handleToggle} {open} />
-	</div>
-
-	<div class="bottom mobileMenu" class:open>
+<section>
+	<div class="bottom mobileMenu">
 		<div class="borders">
 			<div class="menuWrap">
+				<a href="/" class="logo">
+					<Logo />
+				</a>
+
+				<nav class="mainMenu">
+					<!-- Main Nav -->
+					<Nav location="footer" />
+				</nav>
 				<div class="social">
 					<a aria-label="Facebook" href="https://facebook.com/greyhoundtavernlive" target="_BLANK">
 						<svg xmlns="http://www.w3.org/2000/svg" width="45" height="45" viewBox="0 0 45 45">
@@ -62,24 +57,13 @@
 						</svg>
 					</a>
 				</div>
-				<nav class="mainMenu">
-					<!-- Main Nav -->
-					<Nav />
-				</nav>
-				<div class="orderLink">
-					<a
-						href="https://order.toasttab.com/online/greyhound-tavern"
-						class="button neg"
-						target="_blank">Order Online</a
-					>
-				</div>
 			</div>
 		</div>
 	</div>
-</header>
+</section>
 
 <style>
-	header {
+	section {
 		display: flex;
 		justify-content: space-between;
 		flex-direction: column;
@@ -100,17 +84,13 @@
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		padding: 25px 0;
-		width: 300px;
+		width: 250px;
 	}
 	.bottom {
 		width: 100%;
 		background: var(--orange);
 	}
-	.bottom.open {
-		transform: translateY(90.86px);
-		z-index: 99;
-	}
+
 	.borders {
 		margin: 10px 0;
 		border-top: 1px solid var(--gold);
@@ -143,19 +123,11 @@
 			justify-content: center;
 			flex-direction: column;
 		}
-		.top {
-			padding: 0 5%;
-			margin: 0 auto;
-			justify-content: space-between;
-			width: 90%;
+
+		.logo {
+			width: auto;
 		}
-		.bottom {
-			transform: translateY(-100%);
-			position: absolute;
-			top: 0;
-			width: 100%;
-			transition: all 300ms ease-in-out;
-		}
+
 		.menuWrap {
 			flex-direction: column;
 			text-align: center;

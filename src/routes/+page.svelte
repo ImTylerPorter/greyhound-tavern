@@ -1,6 +1,7 @@
 <script>
 	import Arcades from './Arcades.svelte';
 	import Events from './Events.svelte';
+	import FooterMenu from './FooterMenu.svelte';
 	import Header from './Header.svelte';
 	import Hero from './Hero.svelte';
 	import Menu from './Menu.svelte';
@@ -14,3 +15,4 @@
 <Events events={data?.events} />
 <Arcades />
 <SliderContact images={data?.images} />
+<FooterMenu />
