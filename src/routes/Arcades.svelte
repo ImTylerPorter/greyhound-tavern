@@ -42,7 +42,7 @@
 		position: relative;
 		width: 100%;
 		padding-bottom: 400px;
-		z-index: 9;
+		z-index: 11;
 	}
 	.arcadeContent {
 		position: relative;

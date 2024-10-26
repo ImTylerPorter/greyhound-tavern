@@ -1,7 +1,6 @@
 <script>
 	// @ts-nocheck
-
-	let { title, color } = $props();
+	let { title, color = 'black' } = $props();
 </script>
 
 <div class="title">
