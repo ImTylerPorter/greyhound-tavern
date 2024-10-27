@@ -12,6 +12,7 @@
 	let description =
 		'Located in the heart of Downtown Albany, Greyhound Tavern offers fun for the whole family. Come enjoy wood-fired pizza, arcades, and live music!';
 	let previewImageUrl = '/images/preview.jpg';
+	// Use `$session` to get the current session value reactively
 </script>
 
 <svelte:head>
