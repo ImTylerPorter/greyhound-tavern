@@ -1,9 +1,7 @@
 <script>
 	import { page } from '$app/stores';
-	import { supabase } from '$lib/supabase';
 	import { onMount } from 'svelte';
 	import Logo from '../../components/Logo.svelte';
-	import { session } from '$lib/session'; // import the session store
 
 	let formState = $state({
 		email: '',
@@ -39,16 +37,43 @@
 		}
 	};
 
-	const login = async () => {
-		let { email, password } = formState;
-		const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-		if (error) formState.error = error.message;
-		// @ts-ignore
-		session.set(data.session); // Set session in Svelte store
+	const login = async (event) => {
+		let { email, password, error, isLogin } = formState;
+		const formData = new FormData(event.target);
+		formData.append('isLogin', `${isLogin}`);
+
+		if (email == '') {
+			formState.error = 'Please enter an email.';
+			return;
+		}
+
+		if (password == '') {
+			formState.error = 'Please enter a password.';
+			return;
+		}
+
+		try {
+			const response = await fetch($page.url.pathname, {
+				method: 'POST',
+				body: formData
+			});
+
+			const result = await response.json();
+
+			if (!response.ok) {
+				formState.error = result.error.message || 'Login failed.';
+			} else {
+				formState.error = result.message;
+			}
+		} catch (err) {
+			error = 'An error occurred during signup.';
+		}
 	};
 
-	const signUp = async () => {
-		let { email, password, confirmPassword, profilePhoto, passphrase, error } = formState;
+	const signUp = async (event) => {
+		let { email, password, confirmPassword, passphrase, error } = formState;
+		const formData = new FormData(event.target);
+
 		if (email == '') {
 			formState.error = 'Please enter an email.';
 			return;
@@ -68,23 +93,19 @@
 			formState.error = 'Passwords do not match!';
 			return;
 		}
+
+		formData.append('passphrase', `${passphrase}`);
+
 		try {
 			const response = await fetch($page.url.pathname, {
 				method: 'POST',
-				headers: { 'Content-Type': 'application/json' },
-				body: JSON.stringify({
-					email,
-					password,
-					confirmPassword,
-					profilePhoto,
-					passphrase
-				})
+				body: formData
 			});
 
 			const result = await response.json();
 
 			if (!response.ok) {
-				formState.error = result.error || 'Signup failed.';
+				formState.error = result.error.message || 'Signup failed.';
 			} else {
 				formState.error = result.message;
 			}
@@ -92,13 +113,6 @@
 			error = 'An error occurred during signup.';
 		}
 	};
-
-	onMount(() => {
-		let { session } = formState;
-		supabase.auth.getSession().then(({ data }) => {
-			session = data.session;
-		});
-	});
 </script>
 
 <main>
@@ -114,7 +128,7 @@
 				<p class="error">{formState.error}</p>
 			{/if}
 			{#if formState.isLogin}
-				<div class="form">
+				<form class="form" onsubmit={login}>
 					<label>
 						<span>Email</span>
 						<input
@@ -135,10 +149,10 @@
 							oninput={clearError}
 						/>
 					</label>
-					<button type="submit" onclick={login}>Login</button>
-				</div>
+					<button type="submit">Login</button>
+				</form>
 			{:else}
-				<div class="form">
+				<form class="form" onsubmit={signUp}>
 					<label>
 						<span>Email</span>
 						<input
@@ -173,7 +187,7 @@
 							oninput={clearError}
 						/>
 					</label>
-					<label>
+					<!-- <label>
 						<span>Profile Photo</span>
 						{#if formState.previewSrc}
 							<div class="preview">
@@ -181,9 +195,9 @@
 							</div>
 						{/if}
 						<input type="file" accept="image/*" onchange={handleFileChange} />
-					</label>
-					<button type="submit" onclick={signUp}>Signup</button>
-				</div>
+					</label> -->
+					<button type="submit">Signup</button>
+				</form>
 			{/if}
 		</div>
 		<div class="details">
