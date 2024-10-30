@@ -1,6 +1,7 @@
 import { VITE_SIGNUP_PASSPHRASE } from '$env/static/private';
 import { error as svelteError } from '@sveltejs/kit';
 
+
 export const actions = {
   default: async ({ locals, request }) => {
     const data = await request.formData();
@@ -9,9 +10,8 @@ export const actions = {
     const isLogin = data.get('isLogin');
     if (isLogin) {
 
-      const { data: supaData, error } = await locals.supabase.auth.signInWithPassword({ email, password });
+      const { error } = await locals.supabase.auth.signInWithPassword({ email, password });
       if (error) {
-        console.log(error.message)
         throw svelteError(400, error.message);
       }
     } else {
@@ -21,11 +21,11 @@ export const actions = {
         throw svelteError(400, 'Wrong passphrase, please try again.')
       }
 
-      const { data: signUpData, error } = await locals.supabase.auth.signUp({ email, password });
+      const { error } = await locals.supabase.auth.signUp({ email, password });
       if (error) {
-        console.log(error.message)
         throw svelteError(400, error.message);
       }
+
     }
   }
 }

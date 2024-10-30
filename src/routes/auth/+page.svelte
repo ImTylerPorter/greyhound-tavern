@@ -56,7 +56,7 @@
 			});
 			const result = await response.json();
 			formState.error = response.ok
-				? result.message
+				? 'Logged in!'
 				: result.error.message || 'Operation failed. Humanity still not advanced enough.';
 		} catch (err) {
 			formState.error = 'An error occurred. Did we break the space-time continuum?';

@@ -23,17 +23,9 @@
 	});
 
 	const handleFileChange = (event) => {
-		profilePhoto = event.target.files[0];
-		console.log(profilePhoto);
-		if (profilePhoto) {
-			const reader = new FileReader();
-			reader.onload = (e) => {
-				previewSrc = e.target?.result; // Set the preview source to the file data URL
-			};
-			reader.readAsDataURL(profilePhoto); // Convert file to data URL
-		} else {
-			previewSrc = ''; // Clear preview if no file is selected
-		}
+		const file = event.target.files[0];
+		profilePhoto = file;
+		previewSrc = file ? URL.createObjectURL(file) : '';
 	};
 
 	function clearError() {
@@ -95,9 +87,6 @@
 				</label>
 				<button type="submit">Submit</button>
 			</form>
-			{#if userProfile}
-				<button>Logout</button>
-			{/if}
 		</div>
 	</div>
 </main>
