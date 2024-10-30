@@ -1,4 +1,5 @@
 <script>
+	import AdminBar from './AdminBar.svelte';
 	import Arcades from './Arcades.svelte';
 	import Events from './Events.svelte';
 	import Footer from './Footer.svelte';
@@ -7,7 +8,8 @@
 	import Hero from './Hero.svelte';
 	import Menu from './Menu.svelte';
 	import SliderContact from './SliderContact.svelte';
-	export let data;
+	let { data } = $props();
+	let { userProfile } = data;
 	let title = 'Greyhound Tavern - Arcade Bar - Albany, Oregon';
 	let description =
 		'Located in the heart of Downtown Albany, Greyhound Tavern offers fun for the whole family. Come enjoy wood-fired pizza, arcades, and live music!';
@@ -27,7 +29,9 @@
 	<meta property="og:description" content={description} />
 	<meta property="og:url" content="https://greyhoundtavern.live" />
 </svelte:head>
-
+{#if userProfile}
+	<AdminBar {userProfile} />
+{/if}
 <Header />
 <Hero />
 <Menu {data} />

@@ -1,6 +1,7 @@
 <script>
 	import { enhance } from '$app/forms';
 	import { invalidate } from '$app/navigation';
+	import AdminBar from '../AdminBar.svelte';
 
 	const { data } = $props();
 	const { userProfile } = data;
@@ -33,6 +34,7 @@
 	}
 </script>
 
+<AdminBar {userProfile} />
 <main>
 	<div class="container">
 		<div class="card">

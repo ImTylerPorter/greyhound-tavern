@@ -1,8 +1,23 @@
 import Mailgun from 'mailgun.js';
 import formData from 'form-data';  // Make sure to import form-data
 import { error } from '@sveltejs/kit';
-
+import { getOrCreateUserProfile } from '$lib/auth'
+import menu from '../api/menu.json'
+import events from '../api/events.json'
+import images from '../api/slider.json'
 import { VITE_MAILGUN_API_KEY, VITE_EMAIL_TO } from '$env/static/private'; // Import server-side env variables
+
+
+export const load = async ({ locals }) => {
+  const userProfile = await getOrCreateUserProfile(locals)
+  return {
+    userProfile,
+    menu,
+    events,
+    images
+  }
+}
+
 
 // Initialize Mailgun
 const mailgun = new Mailgun(formData);
