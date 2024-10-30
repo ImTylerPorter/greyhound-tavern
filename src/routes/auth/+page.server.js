@@ -53,20 +53,8 @@ export const actions = {
 //     return json({ error: signupError.message }, { status: 400 });
 //   }
 
-//   // If profile photo is provided, upload to storage
-//   if (profilePhoto) {
-//     const fileName = profilePhoto.name || 'default_profile.jpg'; // Default name if not provided
-//     const { data: uploadData, error: uploadError } = await supabase.storage
-//       .from('Website')
-//       .upload(`public/${signUpData.user.id}/${fileName}`, profilePhoto);
+ // If profile photo is provided, upload to storage
 
-//     if (uploadError) {
-//       return json({ error: uploadError.message }, { status: 500 });
-//     }
-
-//     const publicUrl = supabase.storage.from('Website').getPublicUrl(`public/${signUpData.user.id}/${fileName}`);
-//     await supabase.auth.updateUser({ data: { profile_photo: publicUrl } });
-//   }
 
 //   return json({ message: 'User signed up successfully!' });
 

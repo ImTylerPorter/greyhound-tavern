@@ -1,6 +1,5 @@
 <script>
 	import { page } from '$app/stores';
-	import { onMount } from 'svelte';
 	import Logo from '../../components/Logo.svelte';
 
 	let formState = $state({
@@ -23,96 +22,46 @@
 		formState.error = '';
 	}
 
-	const handleFileChange = (event) => {
-		formState.profilePhoto = event.target.files[0];
-
-		if (formState.profilePhoto) {
-			const reader = new FileReader();
-			reader.onload = (e) => {
-				formState.previewSrc = e.target.result; // Set the preview source to the file data URL
-			};
-			reader.readAsDataURL(formState.profilePhoto); // Convert file to data URL
-		} else {
-			formState.previewSrc = ''; // Clear preview if no file is selected
-		}
-	};
-
-	const login = async (event) => {
-		let { email, password, error, isLogin } = formState;
+	async function handleSubmit(event) {
+		event.preventDefault();
 		const formData = new FormData(event.target);
-		formData.append('isLogin', `${isLogin}`);
+		const { isLogin, password, email, confirmPassword, passphrase } = formState;
 
-		if (email == '') {
-			formState.error = 'Please enter an email.';
+		if (!email) {
+			formState.error = 'Email? Never heard of it!';
 			return;
 		}
-
-		if (password == '') {
-			formState.error = 'Please enter a password.';
+		if (!password) {
+			formState.error = 'Password? You must be new here.';
 			return;
 		}
+		if (!isLogin) {
+			if (!passphrase) {
+				formState.error = "Passphrase? It's like a password, but cooler.";
+				return;
+			}
+			if (password !== confirmPassword) {
+				formState.error = "Passwords don't match. Did you blink?";
+				return;
+			}
+		}
+
+		if (isLogin) formData.append('isLogin', `${isLogin}`);
+		if (!isLogin) formData.append('passphrase', passphrase);
 
 		try {
 			const response = await fetch($page.url.pathname, {
 				method: 'POST',
 				body: formData
 			});
-
 			const result = await response.json();
-
-			if (!response.ok) {
-				formState.error = result.error.message || 'Login failed.';
-			} else {
-				formState.error = result.message;
-			}
+			formState.error = response.ok
+				? result.message
+				: result.error.message || 'Operation failed. Humanity still not advanced enough.';
 		} catch (err) {
-			error = 'An error occurred during signup.';
+			formState.error = 'An error occurred. Did we break the space-time continuum?';
 		}
-	};
-
-	const signUp = async (event) => {
-		let { email, password, confirmPassword, passphrase, error } = formState;
-		const formData = new FormData(event.target);
-
-		if (email == '') {
-			formState.error = 'Please enter an email.';
-			return;
-		}
-
-		if (password == '') {
-			formState.error = 'Please enter a password.';
-			return;
-		}
-
-		if (passphrase == '') {
-			formState.error = 'Please enter the passphrase provided by Greyhound Team.';
-			return;
-		}
-
-		if (password != confirmPassword) {
-			formState.error = 'Passwords do not match!';
-			return;
-		}
-
-		formData.append('passphrase', `${passphrase}`);
-
-		try {
-			const response = await fetch($page.url.pathname, {
-				method: 'POST',
-				body: formData
-			});
-
-			const result = await response.json();
-
-			if (!response.ok) {
-				formState.error = result.error.message || 'Signup failed.';
-			} else {
-				formState.error = result.message;
-			}
-		} catch (err) {
-			error = 'An error occurred during signup.';
-		}
-	};
+	}
 </script>
 
 <main>
@@ -127,48 +76,30 @@
 			{#if formState.error}
 				<p class="error">{formState.error}</p>
 			{/if}
-			{#if formState.isLogin}
-				<form class="form" onsubmit={login}>
+			<form class="form" onsubmit={handleSubmit}>
+				<label>
+					<span>Email</span>
+					<input
+						required
+						type="email"
+						name="email"
+						bind:value={formState.email}
+						oninput={clearError}
+					/>
+				</label>
+				<label>
+					<span>Password</span>
+					<input
+						required
+						type="password"
+						name="password"
+						bind:value={formState.password}
+						oninput={clearError}
+					/>
+				</label>
+				{#if !formState.isLogin}
 					<label>
-						<span>Email</span>
-						<input
-							required
-							type="email"
-							name="email"
-							bind:value={formState.email}
-							oninput={clearError}
-						/>
-					</label>
-					<label>
-						<span>Password</span>
-						<input
-							required
-							type="password"
-							name="password"
-							bind:value={formState.password}
-							oninput={clearError}
-						/>
-					</label>
-					<button type="submit">Login</button>
-				</form>
-			{:else}
-				<form class="form" onsubmit={signUp}>
-					<label>
-						<span>Email</span>
-						<input
-							required
-							type="email"
-							name="email"
-							bind:value={formState.email}
-							oninput={clearError}
-						/>
-					</label>
-					<label>
-						<span>Password</span>
-						<input required type="password" name="password" bind:value={formState.password} />
-					</label>
-					<label>
-						<span>Confirm Password Password</span>
+						<span>Confirm Password</span>
 						<input
 							required
 							type="password"
@@ -181,24 +112,15 @@
 						<span>Secret Passphrase</span>
 						<input
 							required
-							type="password"
+							type="text"
 							name="passphrase"
 							bind:value={formState.passphrase}
 							oninput={clearError}
 						/>
 					</label>
-					<!-- <label>
-						<span>Profile Photo</span>
-						{#if formState.previewSrc}
-							<div class="preview">
-								<img src={formState.previewSrc} alt="Profile Photo" />
-							</div>
-						{/if}
-						<input type="file" accept="image/*" onchange={handleFileChange} />
-					</label> -->
-					<button type="submit">Signup</button>
-				</form>
-			{/if}
+				{/if}
+				<button type="submit">{formState.isLogin ? 'Login' : 'Sign Up'}</button>
+			</form>
 		</div>
 		<div class="details">
 			{#if formState.isLogin}
@@ -280,36 +202,6 @@
 	input:focus-within,
 	input:focus {
 		outline-color: var(--gold);
-	}
-
-	input[type='file'] {
-		border: none;
-	}
-
-	input[type='file']::-webkit-file-upload-button {
-		background: var(--orange);
-		padding: 10px 20px;
-		border: 0;
-		outline: 0;
-		color: var(--white);
-		margin-top: 20px;
-		font-weight: bold;
-		transition: all 300ms ease;
-	}
-
-	input[type='file']::-webkit-file-upload-button:hover {
-		background: var(--gold);
-	}
-
-	.preview {
-		width: 100px;
-		height: auto;
-		margin-top: 20px;
-	}
-
-	.preview img {
-		width: 100%;
-		border-radius: 50%;
 	}
 
 	button {
