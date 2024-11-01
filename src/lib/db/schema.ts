@@ -22,7 +22,6 @@ export const menuItemTable = pgTable("menu_items", {
   price: decimal("price", { precision: 10, scale: 2 }),
   categoryId: uuid("category_id").references(() => menuCategoryTable.id).notNull(),
   imageUrl: varchar("image_url", { length: 255 }),
-  available: integer("available").default(1), // 1 for available, 0 for not available
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
 });

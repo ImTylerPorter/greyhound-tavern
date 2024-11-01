@@ -1,8 +1,9 @@
 <script>
 	import AddMenuCat from './AddMenuCat.svelte';
+	import MenuItems from './MenuItems.svelte';
 
 	let { data } = $props();
-	let { menuCats } = data;
+	let { menuCats, menuItems } = data;
 	let menuState = $state({
 		addCat: false,
 		menuCats,
@@ -50,6 +51,9 @@
 				{/if}
 			</div>
 		</div>
+		{#if menuState.menuCats?.length}
+			<MenuItems activeCat={menuState.activeCat} {menuItems} />
+		{/if}
 	</div>
 </main>
 

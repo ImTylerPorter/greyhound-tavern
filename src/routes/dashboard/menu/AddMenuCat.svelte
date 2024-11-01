@@ -9,7 +9,6 @@
 		event.preventDefault();
 		const formData = new FormData(event.target);
 		formData.append('actionType', `menuCat`);
-
 		try {
 			const response = await fetch($page.url.pathname, {
 				method: 'POST',

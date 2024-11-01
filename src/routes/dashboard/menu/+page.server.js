@@ -1,15 +1,16 @@
 import { getOrCreateUserProfile } from '$lib/auth'
-import { menuCategoryTable } from "$lib/db/schema";
-import {getAllMenuCategories} from '$lib/dashboard'
+import { menuCategoryTable, menuItemTable } from "$lib/db/schema";
+import {getAllMenuCategories, getMenuItemsByCategory} from '$lib/dashboard'
 import { db } from "$lib/db";
 import { error } from "@sveltejs/kit";
-import { eq } from "drizzle-orm";
-
 
 export const load = async () => {
   let menuCats = await getAllMenuCategories()
+  let firstCat = menuCats[0].id;
+  let menuItems = await getMenuItemsByCategory(firstCat);
   return {
-    menuCats
+    menuCats,
+    menuItems
   }
 }
 
@@ -21,20 +22,38 @@ export const actions = {
     }
     const data = await request.formData();
     const name = data.get('name');
+    const actionType = data.get('actionType');
+    if (!actionType) {
+      error(401, "You must have filled out the wrong form!")
+    }
 
-    const newCatResult = await db.insert(menuCategoryTable).values({
-      name
-    }).returning({
-      id: menuCategoryTable.id,
-      name: menuCategoryTable.name
-    });
+    if (actionType === 'menuCat') {
+      const newCatResult = await db.insert(menuCategoryTable).values({
+        name
+      }).returning({
+        id: menuCategoryTable.id,
+        name: menuCategoryTable.name
+      });
 
+      return {newCategory: newCatResult[0]};
+    }
+    else if (actionType === 'menuItem') {
+      const description = data.get('description');
+      const categoryId = data.get('categoryId');
 
-    await db.query.profileTable.findFirst({
-      where: eq(menuCategoryTable.id, newCatResult[0].id),
-    });
+      const newMenuItemResult = await db.insert(menuItemTable).values({
+        name,
+        description,
+        categoryId
+      }).returning({
+        id: menuCategoryTable.id,
+        name: menuCategoryTable.name,
+        description: menuCategoryTable.description
+      });
 
-    return {newCategory: newCatResult[0]};
+      return {newMenuItem: newMenuItemResult[0]};
+
+    }
 
   }
 }
