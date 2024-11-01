@@ -6,7 +6,7 @@ import { error } from "@sveltejs/kit";
 
 export const load = async () => {
   let menuCats = await getAllMenuCategories()
-  let firstCat = menuCats[0].id;
+  let firstCat = menuCats ? menuCats[0]?.id : '';
   let menuItems = await getMenuItemsByCategory(firstCat);
   return {
     menuCats,
@@ -57,3 +57,4 @@ export const actions = {
 
   }
 }
+

@@ -1,4 +1,5 @@
 <script>
+	import { page } from '$app/stores';
 	import AddMenuCat from './AddMenuCat.svelte';
 	import MenuItems from './MenuItems.svelte';
 
@@ -7,22 +8,42 @@
 	let menuState = $state({
 		addCat: false,
 		menuCats,
-		activeCat: menuCats ? menuCats[0]?.id : ''
+		activeCat: menuCats ? menuCats[0]?.id : '',
+		isLoading: false
 	});
 
 	function toggleAddCat() {
 		menuState.addCat = !menuState.addCat;
 	}
 
-	function toggleCat(id) {
+	// HEY GROK - I NEED TO MAKE THIS WORK, HOW CAN I TARGET MY page.server.js but not use the actions?
+	async function toggleCat(id) {
+		menuState.isLoading = true;
 		menuState.activeCat = id;
 		menuState.addCat = false;
+
+		try {
+			const response = await fetch(`${$page.url.pathname}/items/?catId=${encodeURIComponent(id)}`, {
+				method: 'GET', // or 'PUT' or 'PATCH' if needed
+				headers: {
+					'Content-Type': 'application/json'
+				}
+			});
+			const result = await response.json();
+			if (result.success) {
+				menuItems = result.menuItems;
+				menuState.isLoading = false;
+			}
+		} catch (err) {
+			console.log(err);
+		}
 	}
 
 	function handleNewCategory(newCategory) {
 		menuState.menuCats = [...menuState.menuCats, newCategory.detail];
 		menuState.activeCat = newCategory.detail.id;
 		menuState.addCat = false;
+		console.log(menuCats);
 	}
 </script>
 
@@ -51,7 +72,7 @@
 				{/if}
 			</div>
 		</div>
-		{#if menuState.menuCats?.length}
+		{#if menuState.menuCats?.length && !menuState.isLoading}
 			<MenuItems activeCat={menuState.activeCat} {menuItems} />
 		{/if}
 	</div>

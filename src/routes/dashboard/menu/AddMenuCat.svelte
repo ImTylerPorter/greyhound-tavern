@@ -9,6 +9,7 @@
 		event.preventDefault();
 		const formData = new FormData(event.target);
 		formData.append('actionType', `menuCat`);
+
 		try {
 			const response = await fetch($page.url.pathname, {
 				method: 'POST',
@@ -18,12 +19,14 @@
 			const data = JSON.parse(result.data);
 			const newMenuCategory = { id: data[2], name: data[3], description: null, parentId: null };
 
+			console.log(response);
 			dispatch('newCategoryCreated', newMenuCategory);
 
 			formError = response.ok
 				? 'Awesome, created!'
 				: result.error.message || 'Operation failed. Humanity still not advanced enough.';
 		} catch (err) {
+			console.log(err);
 			formError = 'An error occurred. Did we break the space-time continuum?';
 		}
 	}
