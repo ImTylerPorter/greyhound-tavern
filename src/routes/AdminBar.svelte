@@ -16,6 +16,7 @@
 		</div>
 		<div>
 			<a href="/">Home</a>
+			<a href="/dashboard">Dashboard</a>
 			<a href="/profile">Manage Profile</a>
 			<a
 				href="/logout"
