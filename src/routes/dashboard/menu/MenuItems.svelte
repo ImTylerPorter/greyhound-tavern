@@ -1,10 +1,13 @@
 <script>
 	// @ts-nocheck
 	import AddMenuItem from './AddMenuItem.svelte';
+	import EditMenuItem from './EditMenuItem.svelte';
 
 	let { activeCat, menuItems } = $props();
 	let menuItemState = $state({
-		showMenuItem: false
+		showMenuItem: false,
+		showEditModal: false,
+		selectedMenuItem: null
 	});
 
 	function toggleAddMenuItem() {
@@ -13,6 +16,17 @@
 	function handleNewMenuItem(newMenuItem) {
 		menuItems = [...menuItems, newMenuItem.detail];
 		menuItemState.showMenuItem = false;
+	}
+
+	function openEditModal(item) {
+		menuItemState.selectedMenuItem = { ...item }; // Make a copy to avoid directly modifying the original
+		menuItemState.showEditModal = true;
+	}
+
+	function handleMenuItemUpdated(event) {
+		const updatedItem = event.detail;
+		menuItems = menuItems.map((item) => (item.id === updatedItem.id ? updatedItem : item));
+		menuItemState.showEditModal = false;
 	}
 </script>
 
@@ -27,7 +41,7 @@
 	{#if menuItems}
 		<ul>
 			{#each menuItems as item}
-				<li>
+				<li onclick={() => openEditModal(item)}>
 					<h4>{item.name}</h4>
 					<p>{item.description}</p>
 				</li>
@@ -36,13 +50,21 @@
 	{/if}
 </section>
 
+{#if menuItemState.showEditModal}
+	<EditMenuItem
+		menuItem={menuItemState.selectedMenuItem}
+		on:menuItemUpdated={handleMenuItemUpdated}
+		on:close={() => (menuItemState.showEditModal = false)}
+	/>
+{/if}
+
 <style>
 	section {
 		width: 600px;
 		max-width: 100%;
 		margin: 0 auto;
 		border: 1px solid #ccc;
-		margin-top: 50px;
+		margin: 50px auto;
 	}
 	header {
 		display: flex;
@@ -76,6 +98,12 @@
 	}
 	li {
 		padding: 20px;
+		cursor: pointer;
+		background: white;
+	}
+	li:hover {
+		transform: scale(1.1);
+		box-shadow: 2px 0 10px rgba(0, 0, 0, 0.3);
 	}
 	li:nth-child(even) {
 		background: #ccc;

@@ -22,7 +22,6 @@
 			});
 			const result = await response.json();
 			const data = JSON.parse(result.data);
-			// console.log(data);
 			const newMenuItem = { id: data[2], name: data[3], description: data[4] };
 
 			dispatch('newMenuItemCreated', newMenuItem);

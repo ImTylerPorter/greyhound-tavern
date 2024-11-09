@@ -3,6 +3,7 @@ import { menuCategoryTable, menuItemTable } from "$lib/db/schema";
 import {getAllMenuCategories, getMenuItemsByCategory} from '$lib/dashboard'
 import { db } from "$lib/db";
 import { error } from "@sveltejs/kit";
+import { eq } from 'drizzle-orm';
 
 export const load = async () => {
   let menuCats = await getAllMenuCategories()
@@ -40,18 +41,34 @@ export const actions = {
     else if (actionType === 'menuItem') {
       const description = data.get('description');
       const categoryId = data.get('categoryId');
-
       const newMenuItemResult = await db.insert(menuItemTable).values({
         name,
         description,
         categoryId
       }).returning({
-        id: menuCategoryTable.id,
-        name: menuCategoryTable.name,
-        description: menuCategoryTable.description
+        id: menuItemTable.id,
+        name: menuItemTable.name,
+        description: menuItemTable.description
       });
 
       return {newMenuItem: newMenuItemResult[0]};
+
+    }
+
+    else if (actionType === 'updateMenuItem') {
+      const id = data.get('id');
+      const description = data.get('description');
+
+      const updatedMenuItemResult = await db.update(menuItemTable).set({
+        name,
+        description,
+      }).where(eq(menuItemTable.id, id)).returning({
+        id: menuItemTable.id,
+        name: menuItemTable.name,
+        description: menuItemTable.description
+      });;
+
+      return {updatedMenuItem: updatedMenuItemResult[0]};
 
     }
 
