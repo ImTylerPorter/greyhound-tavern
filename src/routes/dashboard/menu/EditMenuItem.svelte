@@ -56,6 +56,14 @@
 				<button type="submit">Save</button>
 				<button class="close" onclick={() => dispatch('close')}>Cancel</button>
 			</div>
+			<div class="delete">
+				<a
+					href="/dashboard/menu/delete?id={menuItem.id}"
+					onclick={(e) =>
+						!confirm(`Are you really sure you want to delete "${menuItem.name}"`) &&
+						e.preventDefault()}>DELETE</a
+				>
+			</div>
 		</form>
 	</div>
 </div>
