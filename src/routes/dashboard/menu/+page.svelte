@@ -4,13 +4,18 @@
 	import MenuItems from './MenuItems.svelte';
 
 	let { data } = $props();
-	let { menuCats, menuItems } = data;
+	let { menuCats, menuItems, activeCat } = data;
+
 	let menuState = $state({
 		addCat: false,
 		menuCats,
 		activeCat: menuCats ? menuCats[0]?.id : '',
 		isLoading: false
 	});
+
+	if (activeCat) {
+		menuState.activeCat = activeCat;
+	}
 
 	function toggleAddCat() {
 		menuState.addCat = !menuState.addCat;

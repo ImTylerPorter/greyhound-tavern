@@ -7,7 +7,8 @@
 	let menuItemState = $state({
 		showMenuItem: false,
 		showEditModal: false,
-		selectedMenuItem: null
+		selectedMenuItem: null,
+		total: menuItems.length
 	});
 
 	function toggleAddMenuItem() {
@@ -15,6 +16,7 @@
 	}
 	function handleNewMenuItem(newMenuItem) {
 		menuItems = [...menuItems, newMenuItem.detail];
+		menuItemState.total++;
 		menuItemState.showMenuItem = false;
 	}
 
@@ -26,6 +28,7 @@
 	function handleMenuItemUpdated(event) {
 		const updatedItem = event.detail;
 		menuItems = menuItems.map((item) => (item.id === updatedItem.id ? updatedItem : item));
+		menuItems.sort((a, b) => a.order - b.order);
 		menuItemState.showEditModal = false;
 	}
 </script>
@@ -36,7 +39,11 @@
 		<a onclick={toggleAddMenuItem}>+ ADD MENU ITEM</a>
 	</header>
 	{#if menuItemState.showMenuItem}
-		<AddMenuItem {activeCat} on:newMenuItemCreated={handleNewMenuItem} />
+		<AddMenuItem
+			{activeCat}
+			total={menuItemState.total}
+			on:newMenuItemCreated={handleNewMenuItem}
+		/>
 	{/if}
 	{#if menuItems}
 		<ul>

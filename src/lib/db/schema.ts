@@ -24,6 +24,7 @@ export const menuItemTable = pgTable("menu_items", {
   imageUrl: varchar("image_url", { length: 255 }),
   createdAt: timestamp("created_at").defaultNow(),
   updatedAt: timestamp("updated_at").defaultNow(),
+  order: integer("order").notNull(),
 });
 
 export const eventTable = pgTable("events", {

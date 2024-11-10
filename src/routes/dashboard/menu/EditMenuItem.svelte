@@ -5,6 +5,7 @@
 	const dispatch = createEventDispatcher();
 
 	let { menuItem } = $props();
+	console.log(menuItem);
 	let formError = $state('');
 
 	function handleBackgroundClick(event) {
@@ -26,7 +27,8 @@
 			});
 			const result = await response.json();
 			const data = JSON.parse(result.data);
-			const updatedMenuItem = { id: data[2], name: data[3], description: data[4] };
+			console.log(data);
+			const updatedMenuItem = { id: data[2], name: data[3], description: data[4], order: data[5] };
 			console.log(updatedMenuItem);
 
 			dispatch('menuItemUpdated', updatedMenuItem);
@@ -52,13 +54,17 @@
 				<span>Description</span>
 				<textarea name="description" bind:value={menuItem.description}></textarea>
 			</label>
+			<label>
+				<span>Order</span>
+				<input type="number" name="order" bind:value={menuItem.order} />
+			</label>
 			<div class="buttons">
 				<button type="submit">Save</button>
 				<button class="close" onclick={() => dispatch('close')}>Cancel</button>
 			</div>
 			<div class="delete">
 				<a
-					href="/dashboard/menu/delete?id={menuItem.id}"
+					href="/dashboard/menu/delete?id={menuItem.id}&catId={menuItem.categoryId}"
 					onclick={(e) =>
 						!confirm(`Are you really sure you want to delete "${menuItem.name}"`) &&
 						e.preventDefault()}>DELETE</a

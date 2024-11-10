@@ -13,11 +13,6 @@ const supabase: Handle = async ({ event, resolve }) => {
   event.locals.supabase = createServerClient(PUBLIC_SUPABASE_URL, PUBLIC_SUPABASE_ANON_KEY, {
     cookies: {
       getAll: () => event.cookies.getAll(),
-      /**
-       * SvelteKit's cookies API requires `path` to be explicitly set in
-       * the cookie options. Setting `path` to `/` replicates previous/
-       * standard behavior.
-       */
       setAll: (cookiesToSet) => {
         cookiesToSet.forEach(({ name, value, options }) => {
           event.cookies.set(name, value, { ...options, path: '/' })
@@ -50,6 +45,14 @@ const supabase: Handle = async ({ event, resolve }) => {
 
     return { session, user }
   }
+
+  // Initialize or update catId from cookies or set it to a default value
+  // Here we assume that catId could be stored in a cookie named 'catId'
+  const storedCatId = event.cookies.get('catId');
+  event.locals.catId = storedCatId || ''; // 'defaultCategoryId' could be replaced with logic to fetch the first category
+
+  // If you want to update the cookie when catId changes, you can do so here or in another part of your application logic
+  // event.cookies.set('catId', event.locals.catId, { path: '/' });
 
   return resolve(event, {
     filterSerializedResponseHeaders(name) {

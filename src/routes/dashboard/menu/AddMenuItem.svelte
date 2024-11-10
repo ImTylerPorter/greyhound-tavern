@@ -3,9 +3,10 @@
 	import { createEventDispatcher } from 'svelte';
 
 	const dispatch = createEventDispatcher();
-	let { activeCat } = $props();
+	let { activeCat, total } = $props();
 	let name = $state('');
 	let description = $state('');
+	let order = $state(total + 1);
 	let formError = $state('');
 
 	async function handleSubmit(event) {
@@ -22,7 +23,7 @@
 			});
 			const result = await response.json();
 			const data = JSON.parse(result.data);
-			const newMenuItem = { id: data[2], name: data[3], description: data[4] };
+			const newMenuItem = { id: data[2], name: data[3], description: data[4], order: data[5] };
 
 			dispatch('newMenuItemCreated', newMenuItem);
 
@@ -50,6 +51,10 @@
 		<label>
 			<span>Description</span>
 			<textarea placeholder="Enter description" name="description" bind:value={description} />
+		</label>
+		<label>
+			<span>Order</span>
+			<input type="number" name="order" bind:value={order} />
 		</label>
 		<button type="submit">Add Menu Item</button>
 	</form>
