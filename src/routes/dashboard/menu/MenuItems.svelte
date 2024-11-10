@@ -16,6 +16,7 @@
 	}
 	function handleNewMenuItem(newMenuItem) {
 		menuItems = [...menuItems, newMenuItem.detail];
+		menuItems.sort((a, b) => a.order - b.order);
 		menuItemState.total++;
 		menuItemState.showMenuItem = false;
 	}
