@@ -97,6 +97,7 @@
 		font-size: 1.2rem;
 		font-weight: bold;
 		text-transform: uppercase;
+		cursor: pointer;
 	}
 
 	.addCatWrap {
